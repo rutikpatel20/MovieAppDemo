@@ -1,0 +1,29 @@
+<div class="center flex-column" style= "height: auto;">
+  <!--Error Message-->
+  <% if flash[:errors] %>
+    <% flash.each do |name,message| %>
+      <p class="text-success"><%= message%></p>
+    <% end %>
+  <% end %>
+  <!-- Add New Movie -->
+  <!-- Movie Table -->
+  <div class="grid-container">
+    <% @movies.each do |m| %>
+      <div class="showcard">
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <%  if m.poster.attached? %>
+              <%= image_tag m.poster.variant(:thumb), alt: "Image not loaded" %>
+            <% end %>
+            <h5 class="card-title"><%= link_to m.movie_name, movie_path(m) %></h5>
+            <p class="card-text"><%= m.release_date %></p>
+            <div class="card_btn">
+              <%= button_to "Edit" , edit_movie_path(m), method: :get ,class:"btn btn-outline-success shadow px-3 py-2 m-2" %>
+              <%= button_to "Delete", movie_path(m), method: :delete ,class:"btn btn-outline-danger shadow px-3 py-2 m-2" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

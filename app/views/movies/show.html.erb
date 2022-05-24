@@ -1,0 +1,51 @@
+<!-- User Details Showing -->
+<div class="center flex-column" id="vantajs" >
+  <!--Error Message-->
+  <% if flash[:errors] %>
+    <% flash.each do |name,message| %>
+      <p class="text-danger"><%= message%></p>
+    <% end %>
+  <% end %>
+  <div class="showcard">
+    <div class="card" style="width: 60rem;">
+      <div class="row no-gutters">
+        <div class="col-md-4">
+          <div id="demo" class="carousel slide" data-bs-ride="carousel">
+            <!-- The slideshow/carousel -->
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <%  if @movie.poster.attached? %>
+                  <%= image_tag @movie.poster.variant(:thumb), alt: "Image not loaded" %>
+                <% end %>
+              </div>
+              <% @movie.images.each do |img| %>
+                <div class="carousel-item ">
+                  <%= image_tag img.variant(resize: "350x350"), alt: "Image not loaded" %>
+                </div>
+              <% end %>
+            </div>
+            <!-- Left and right controls/icons -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+              <span class="carousel-control-next-icon"></span>
+            </button>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">Movie Name :  <%= @movie.movie_name %></h5>
+            <p class="card-text">Release Date : <%= @movie.release_date %></p>
+            <p class="card-text">Description : <%= @movie.description %></p>
+            <div class="card_btn mt-5">
+              <%= button_to "Edit" , edit_movie_path, method: :get ,class:"btn btn-outline-success shadow px-5 py-2 m-2" %>
+              <%= button_to "Delete", movie_path(@movie), method: :delete ,class:"btn btn-outline-danger shadow px-5 py-2 m-2" %>
+              <%= button_to "View All Movies", movies_path, method: :get ,class:"btn btn-outline-primary shadow p-2 m-2" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
