@@ -3,4 +3,5 @@ class Movie < ApplicationRecord
     attachable.variant :thumb, resize_to_limit: [350, 350]
   end
   has_many_attached :images
+  has_one_attached :trailer
 end

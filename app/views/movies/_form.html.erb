@@ -25,30 +25,36 @@
         <%= f.file_field :poster, class:"mb-2 form-control" %>
         <br>
         <%= f.label :images, "Images :" %>
-        <%= f.file_field :images,multiple: true , class:"mb-2 form-control" %>
+        <%= f.file_field :images, multiple: true , class:"mb-2 form-control" %>
+        <br>
+        <%= f.label :trailer, "Trailer :" %>
+        <%= f.file_field :trailer , class:"mb-2 form-control" %>
         <br>
         <div class="d-flex justify-content-center">
           <%= f.submit "Save Movie", class:"btn-secondary border-0 shadow py-2 px-5" %>
         </div>
       <% end %>
-      <table class="table table-secondary table-striped">
-        <ol class="fs-2">
-          <thead class="table-secondary">
-            <td> Uploaded Images </td>
-            <td> Action </td>
-          </thead>
-          <% @movie.images.each do |mov_img| %>
-            <tr>
-              <td>
-                <%= image_tag mov_img.variant(resize: "75x75"), alt: "Image not loaded" %>
-                <%= link_to mov_img.filename, rails_blob_path(mov_img, disposition: :attachment), class:"text-dark text-decoration-none" %>
-              </td>
-              <td>
-                <%= link_to 'Remove', delete_file_movie_url(mov_img.id),  data: { turbo_method: :delete }, class: "text-danger text-decoration-none" %>
-              </td>
-            </tr>
-          <% end %>
-        </ul>
-      </div>
+      <%  if @movie.images.attached? %>
+        <table class="table table-secondary table-striped">
+          <ol class="fs-2">
+            <thead class="table-secondary">
+              <td> Uploaded Images </td>
+              <td> Action </td>
+            </thead>
+            <% @movie.images.each do |mov_img| %>
+              <tr>
+                <td>
+                  <%= image_tag mov_img.variant(resize: "75x75"), alt: "Image not loaded" %>
+                  <%= link_to mov_img.filename, rails_blob_path(mov_img, disposition: :attachment), class:"text-dark text-decoration-none" %>
+                </td>
+                <td>
+                  <%= link_to 'Remove', delete_file_movie_url(mov_img.id),  data: { turbo_method: :delete }, class: "text-danger text-decoration-none" %>
+                </td>
+              </tr>
+            <% end %>
+          </ol>
+        </table>
+      <% end %>
     </div>
   </div>
+</div>
