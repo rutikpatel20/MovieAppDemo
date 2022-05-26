@@ -85,9 +85,7 @@ h1 {
 }
 
 .showcard .card .btn {
-  /* border-radius: 2em; */
   color: #ffffff;
-  /* padding: 0.5em 1.5em; */
 }
 
 .showcard .card .btn:hover {
@@ -97,6 +95,5 @@ h1 {
 
 .showcard .card .card_btn {
   display: flex;
-  /* justify-content: center; */
   align-items: center;
 }
